@@ -1,0 +1,17 @@
+{{page-title "Login"}}
+<h1>Please, Log in</h1>
+
+<form {{on "submit" this.login}}>
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username" {{on "change" (fn this.update "username")}} />
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password" {{on "change" (fn this.update "password")}} />
+
+  <button type="submit" value="login">Login</button>
+</form>
+
+{{#if this.error}}
+  <p>{{this.error}}</p>
+{{/if}}
+{{outlet}}
