@@ -5,7 +5,8 @@ dotenv.config();
 const customerSchema = new mongoose.Schema({
     company: String,
     contact_person: String,
-    sales_history: String,
+    sales_history: Number,
+    special_deal: Number,
 });
 
 const Customer = mongoose.model('Customer', customerSchema);

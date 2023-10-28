@@ -6,10 +6,11 @@
 .main {
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 20px auto;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 80px;
+  padding-top: 20px;
   gap: 20px;
 }
 
@@ -21,10 +22,19 @@
 
 .container {
   display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.products-container {
+  display: flex;
   flex-direction: column;
   gap: 20px;
   width: 500px;
-  height: 500px;
+  height: 400px;
   overflow-y: auto;
 }
 
