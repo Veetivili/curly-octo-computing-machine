@@ -7,8 +7,5 @@ export default class DashboardRoute extends Route {
   beforeModel(transition) {
     this.session.requireAuthentication(transition, 'login');
   }
-
-  model() {
-    //return this.store.findAll('product');
-  }
+  
 }

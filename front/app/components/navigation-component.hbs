@@ -6,6 +6,10 @@
         <li>
             <LinkTo @route="dashboard">Dashboard</LinkTo>
         </li>
+        <li>
+            <LinkTo @route="products">Products</LinkTo>
+        </li>
+        
         {{#if this.session.isAuthenticated}}
             <li><button type="button" {{on "click" this.logout}}>Logout</button></li>
         {{/if}}

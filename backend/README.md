@@ -118,6 +118,21 @@ function authenticateJWT(req, res, next) {
  */
 ```
 
+#### `api/products`
+
+Returns JSON API format:
+
+```json
+{
+            "id": "6538d098f26813fd31e607ab",
+            "type": "product",
+            "attributes": {
+                "name": "Soup - Knorr, Classic Can. Chili",
+                "description": "Proin eu mi. Nulla ac enim.",
+                "price": "75.45"
+            }
+        },
+```
 
 
 

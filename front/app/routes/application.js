@@ -13,5 +13,5 @@ export default class Application extends Route {
   @action
   async didTransition() {
     await this.currentUser.load();
-  } 
+  }
 }
