@@ -15,7 +15,6 @@ export default Base.extend({
 
     if (response.ok) {
       return response.json();
-      
     } else {
       const error = await response.json();
       throw new Error(error.message);
