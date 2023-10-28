@@ -18,10 +18,12 @@ app.use(express.json());
 // Import Routes
 const authRoute = require('./routes/auth');
 const productRoute = require('./routes/product');
+const customerRoute = require('./routes/customer');
 
 // Route Middlewares
 app.use('/api/auth', authRoute);
 app.use('/api/products', productRoute);
+app.use('/api/customers', customerRoute);
 
 // Server
 var server = app.listen(process.env.PORT, () => {
