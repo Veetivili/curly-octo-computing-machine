@@ -5,7 +5,7 @@ dotenv.config();
 const productSchema = new mongoose.Schema({
     name: String,
     description: String,
-    listing_price: String,
+    listing_price: Number,
 });
 
 const Product = mongoose.model('Product', productSchema);
