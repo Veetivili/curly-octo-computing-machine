@@ -4,13 +4,12 @@ import { inject as service } from '@ember/service';
 
 export default class CustomersIdRoute extends Route {
   @service store;
+  @service productData;
 
   async model(params) {
-    try {
-      return await this.store.findRecord('customer', params.id);
-    } catch (error) {
-      this.transition('customers');
-    }
+    let customer = await this.store.findRecord('customer', params.id);
+    let products = await this.productData.fetchProducts();
+    return { customer, products };
   }
+  
 }
-

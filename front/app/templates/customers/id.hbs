@@ -1,8 +1,15 @@
 <div class="container">
-    <h1>{{this.model.company}}</h1>
-    <p>Contact Person: {{this.model.contact_person}}</p>
-    <p>Sales History: {{this.model.sales_history}}</p>
+    <h1>{{this.model.customer.company}}</h1>
+    <p>Contact Person: {{this.model.customer.contact_person}}</p>
+    <p>Sales History: {{this.model.customer.sales_history}}</p>
     {{!-- ...other customer details --}}
+    <div class="products-container">
+        <h2>Products</h2>
+        <ul>
+            {{#each this.model.products as |product|}}
+                <li>{{product.name}} - ${{product.price}}</li>
+            {{/each}}
+        </ul>
+    </div>
 </div>
 {{outlet}}
-
