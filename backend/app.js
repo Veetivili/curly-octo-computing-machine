@@ -36,3 +36,7 @@ var server = app.listen(process.env.PORT, () => {
 });
 
 server;
+// While running tests, we need to close the server for jest to exit properly
+//server.close();
+
+module.exports = app;
