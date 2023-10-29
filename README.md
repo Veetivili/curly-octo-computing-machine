@@ -48,7 +48,89 @@ Siirtyessä asiakas sivulle näytetään modelista ladatut asiakkaat ja valitaan
 Painamalla painiketta aktivoituu `@action applyDiscounts` kontrollerista, joka antaa parametrit eteenpäin `product-data` servicelle, mistä lähtee API-kutsun backkärille, vastaus data tulee kontrollerilta takaisin templatelle, mikä renderöi tuotteet(nimi, hinta, kokonaisalennus %, ja eri alennus tyyppien %:t).
 Alennukset on ehdollisia parametrejä, joten voit hakea ilman alennuksia, tai valita haluamasi alennustyypit aktiiviseksi ja hakea uudet hintatiedot.
 
-<img src="./images/pricemanagementapp.gif width="800"/>
+<img src="./images/pricemanagementapp.gif" width="800" />
+
+#### Testaus
+
+Emberin puolella `ember-cli` testaus nätti todella näppärältä, mutten ehtinyt siihen perehtyä valitettavasti. Node.js backendin autentikaatiolle simppeli `unit-test`:
+
+```js
+const mongoose = require("mongoose");
+const request = require("supertest");
+const app = require("../app");
+
+require("dotenv").config();
+
+let originalLog;
+let token;
+let db;
+
+beforeAll(async () => {
+    originalLog = console.log;
+    console.log = jest.fn();
+  
+    // Close existing connections
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.close();
+    }
+  
+    // Connect to test database
+    db = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+  
+    const response = await request(app).post("/api/auth/login")
+    .send({
+          username: "testuser",
+          password: "password",
+      });
+    token = response.body.data.token;
+  });
+  
+
+  afterAll(async () => {
+    console.log = originalLog;
+
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.close();
+    }
+  });
+
+describe("POST /api/auth/login", () => {
+    it("Should return 401 with wrong password", async () => {
+        const response = await request(app).post("/api/auth/login").send({
+            username: "testuser",
+            password: "wrongpassword",
+        });
+        expect(response.statusCode).toBe(401);
+    });
+
+    it("Should return token in body", async () => {
+        const response = await request(app).post("/api/auth/login").send({
+            username: "testuser",
+            password: "password",
+        });
+        expect(response.statusCode).toBe(200);
+        expect(response.body.data).toHaveProperty('token');
+    });
+});
+
+describe("POST /api/auth/logout", () => {
+    it("Should return 401 with no token", async () => {
+        const response = await request(app).post("/api/auth/logout");
+        expect(response.statusCode).toBe(401);
+    });
+
+    it("Should return 200 with token", async () => {
+        const response = await request(app).post("/api/auth/logout").set('authorization-token', `token: ${token}`);
+        console.log(token);
+        expect(response.statusCode).toBe(200);
+    });
+});
+```
+
+<img src="./images/test.png" width="300" />
 
 ### Kehityskohteita
 
