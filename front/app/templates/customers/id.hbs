@@ -1,15 +1,62 @@
+{{!-- app/templates/customers/id.hbs --}}
 <div class="container">
-    <h1>{{this.model.customer.company}}</h1>
+    <h4>Company: {{this.model.customer.company}}</h4>
     <p>Contact Person: {{this.model.customer.contact_person}}</p>
-    <p>Sales History: {{this.model.customer.sales_history}}</p>
-    {{!-- ...other customer details --}}
+    <p>Annual Sales: {{this.model.customer.sales_history}}</p>
 </div>
-    <div class="products-container">
-        <h2>Products</h2>
-        <ul>
-            {{#each this.model.products as |product|}}
-                <li>{{product.name}} - ${{product.price}}</li>
-            {{/each}}
-        </ul>
-    </div>
+<div class="container">
+    <h2>Apply Discounts</h2>
+    <label>
+        <input type="checkbox" name="timeOfYear" {{on "change" this.updateDiscountSelections}} checked={{this.discountSelections.timeOfYear}}>
+        Time of Year Discount
+    </label>
+    <label>
+        <input type="checkbox" name="salesHistory" {{on "change" this.updateDiscountSelections}} checked={{this.discountSelections.salesHistory}}>
+        Sales History Discount
+    </label>
+    <label>
+        <input type="checkbox" name="specialDealCheckbox" {{on "change" this.updateDiscountSelections}} checked={{this.discountSelections.specialDealCheckbox}}>
+    </label>
+    <label>
+        Special Discount Amount:
+        <input type="number" name="specialDeal" step="0.01" {{on "input" this.updateDiscountSelections}} value={{this.discountSelections.specialDeal}} disabled={{unless this.discountSelections.specialDealCheckbox "disabled"}}>
+    </label>
+    <button type="button" {{on "click" this.applyDiscounts}}>Apply Discounts</button>
+</div>
+<div class="container">
+  <h2>Products</h2>
+  <table class="products-table">
+    <thead>
+      <tr>
+        <th class="product-name-header">Product Name</th>
+        <th class="product-price-header">Price</th>
+        <th class="product-original-price-header">Original Price</th>
+        <th class="product-total-discount-header">Total Discount</th>
+        <th class="product-sales-history-discount-header">Sales History Discount</th>
+        <th class="product-time-of-year-discount-header">Time of Year Discount</th>
+        <th class="product-special-deal-discount-header">Special Deal Discount</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.products as |product|}}
+        <tr class="product-row">
+          <td class="product-name-cell">{{product.name}}</td>
+          <td class="product-price-cell">${{product.price}}</td>
+          {{#if this.discountMetadata}}
+            <td class="product-original-price-cell">${{product.original_price}}</td>
+            <td class="product-total-discount-cell">{{this.discountMetadata.totalDiscount}}%</td>
+            <td class="product-sales-history-discount-cell">{{this.discountMetadata.salesHistoryDiscount}}%</td>
+            <td class="product-time-of-year-discount-cell">{{this.discountMetadata.timeOfYearDiscount}}%</td>
+            <td class="product-special-deal-discount-cell">{{this.discountMetadata.specialDealDiscount}}%</td>
+          {{else}}
+            <td colspan="5" class="product-no-discount-cell">No discount information available</td>
+          {{/if}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
 {{outlet}}
+
+
