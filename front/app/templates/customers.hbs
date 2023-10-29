@@ -1,10 +1,9 @@
 {{page-title "Customers"}}
 <div class="container">
-    <h1>This page will render customers</h1>
+    <h1 class="customer-title">Customers:</h1>
     {{#each @model as |customer|}}
         <Customer::Customer @customer={{customer}} />
     {{/each}}
-    <h2>Products</h2>
 </div>
 
 {{outlet}}
