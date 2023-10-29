@@ -2,7 +2,7 @@
 <NavigationComponent/>
 <div class="main">
     {{#if this.session.isAuthenticated}}
-    <p>You are logged in as: <span class="current-user">{{this.currentUser.username}} Token: <small class="remove.this">{{this.currentUser.token}}</small></span></p>
+    <p>You are logged in as: <span class="current-user">{{this.currentUser.username}}</span></p>
 {{else}}
     <p>You are not logged in!</p>
 {{/if}}

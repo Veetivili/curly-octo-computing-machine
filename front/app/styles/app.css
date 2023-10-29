@@ -1,98 +1,189 @@
-/* Ember supports plain CSS out of the box. More info: https://cli.emberjs.com/release/advanced-use/stylesheets/ */
+/* Reset CSS */
 * {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.main {
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0e0e0;
+  color: #212121;
+}
+
+a {
+  transition: color 0.3s ease;
+}
+
+button {
+  transition: background-color 0.3s ease;
+}
+
+/* Navigation */
+nav.menu {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 20px;
+}
+
+nav.menu ul {
+  list-style-type: none;
   display: flex;
-  flex-direction: column;
-  margin: 20px auto;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  padding-top: 20px;
   gap: 20px;
 }
 
-.nav {
-  z-index: 1;
-  position: fixed;
-  top: 0;
+nav.menu li {
+  list-style-type: none;
 }
 
-.container {
+nav.menu li button {
+  background-color: #64b5f6;
+  border: 1px solid #64b5f6;
+}
+
+nav.menu li button:hover {
+  background-color: #0288d1;
+  border-color: #0288d1;
+}
+
+nav.menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+nav.menu a.active,
+nav.menu a:hover {
+  color: #007bff;
+}
+
+/* Main Container */
+div.main,
+div.container {
+  background-color: #fff;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Login Page */
+form {
   display: flex;
-  margin: auto;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
 }
 
-.products-container {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 500px;
-  height: 400px;
-  overflow-y: auto;
+form label {
+  font-weight: bold;
 }
 
-.menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #333;
-  color: #fff;
+form input {
   padding: 10px;
-  z-index: 1;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.menu ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li {
-  margin-right: 10px;
-}
-
-.menu li:last-child {
-  margin-right: 0;
-}
-
-.menu a {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-}
-
-.menu a:hover {
-  background-color: #555;
-}
-
-.menu button {
-  background-color: #fff;
-  color: #333;
+form button {
+  padding: 10px 20px;
   border: none;
-  padding: 10px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* Customer Page */
+div.customer-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+div.customer-item a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+div.customer-item a:hover {
+  background-color: #f0f0f0;
+}
+
+div.products-container ul {
+  list-style-type: none;
+  padding: 10px 0;
+}
+
+div.products-container li {
+  padding: 5px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Logout Button */
+nav.menu li button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.menu button:hover {
-  background-color: #ddd;
+nav.menu li button:hover {
+  background-color: #0056b3;
 }
 
-.current-user {
-  font-weight: bold;
-  font-size: larger;
+/*-- Products --*/
+
+div.products-container {
+  border-top: 2px solid #ddd;
+  margin-top: 20px;
+  padding-top: 20px;
 }
 
-.remove-this {
-  font-size: 2px;
+div.products-container h2 {
+  margin-top: 0;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.products-table th,
+.products-table td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.products-table th {
+  background-color: #f0f0f0;
+  color: #424242;
+}
+
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th, .products-table td {
+  padding: 10px 15px;
+  border: 1px solid #bdc3c7;
+}
+
+.products-table thead {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.product-row:nth-of-type(even) {
+  background-color: #f9f9f9;
 }
